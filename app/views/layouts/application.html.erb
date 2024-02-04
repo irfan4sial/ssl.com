@@ -14,20 +14,23 @@
 
   <body>
     <% if admin_signed_in? %> 
-      <div class="text-3xl font-bold underline"> Welcome <%= current_admin.email %> </div>
+      <p class="flex grid grid-rows-4 grid-flow-col gap-4 text-1xl font-bold underline">
+        <span>Current User Email: <%= current_admin.email %> </span>|
+        <%= button_to "Sign out", destroy_admin_session_path, method: :delete %>
+      </p>
       <div class="flex flex-row">
         <ul class="flex flex-row">
           <li><%= link_to "Users", users_path %></li>
           <li><%= link_to "Roles", roles_path %></li>
           <li><%= link_to "Teams", teams_path %></li>
         </ul>
-        <%= button_to "Sign out", destroy_admin_session_path, method: :delete %>
       </div> 
     <% else %>
       <%= button_to "Sign in", new_admin_session_path %> 
     <% end %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
+    <hr />
     <%= yield %>
   </body>
 </html>

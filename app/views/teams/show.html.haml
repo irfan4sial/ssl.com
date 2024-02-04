@@ -1,0 +1,28 @@
+
+%h1 Team Details
+
+%dl
+  %dt ID:
+  %dd= @team.id
+
+  %dt Name:
+  %dd= @team.name
+
+  %dt Description:
+  %dd= @team.description
+
+  -# Add more team attributes as needed
+
+  %dt Owner:
+  %dd= @team.owner.username
+
+  %dt Members:
+  %dd
+    - if @team.users.present?
+      %ul
+        - @team.users.each do |member|
+          %li= link_to member.username, user_path(member)
+    - else
+      No members in this team
+
+= link_to 'Back', teams_path

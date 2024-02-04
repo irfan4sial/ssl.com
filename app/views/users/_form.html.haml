@@ -19,9 +19,14 @@
     = form.text_field :username, required: true
 
   .field
-    = form.fields_for :roles do |role_form|
+    = form.fields_for :user_roles do |role_form|
       = role_form.label :name, "Role"
-      = role_form.collection_select :id, Role.all, :id, :name, include_blank: true
+      = role_form.collection_select :role_id, Role.all, :id, :name, include_blank: true
+
+  .field
+    = form.fields_for :team_memberships do |role_form|
+      = role_form.label :name, "Team"
+      = role_form.collection_select :team_id, Team.all, :id, :name, include_blank: true   
 
   .field
     = form.label :email

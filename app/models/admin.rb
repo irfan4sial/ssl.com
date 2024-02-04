@@ -10,6 +10,10 @@ class Admin < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/, message: 'is not a valid email address' }
   validates :password, presence: true, length: { minimum: 6 }, confirmation: true
 
+  has_many :users
+  has_many :teams
+  has_many :roles
+
   attr_accessor :login
 
   def self.find_for_authentication(conditions)

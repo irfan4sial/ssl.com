@@ -8,10 +8,12 @@ class User < ApplicationRecord
   
   has_many :team_memberships
   has_many :teams, through: :team_memberships
+  accepts_nested_attributes_for :team_memberships, allow_destroy: true
 
   has_many :user_roles
-  has_many :roles, through: :user_roles      
+  has_many :roles, through: :user_roles    
+  belongs_to :admin  
   
-  accepts_nested_attributes_for :roles
+  accepts_nested_attributes_for :user_roles
 
 end

@@ -1,16 +1,18 @@
 class TeamsController < ApplicationController
   before_action :authenticate_admin!
+  before_action :set_current_admin
 
   def index
-    @teams = Team.all
+    @teams = @admin.teams.all
   end
 
   def new
-    @team = Team.new
+    @team = @admin.teams.new
+    @team.team_memberships.build
   end
 
   def create
-    @team = Team.new(team_params)
+    @team = @admin.teams.new(team_params)
     if @team.save
       redirect_to teams_path, notice: 'Team was successfully created.'
     else
@@ -18,12 +20,17 @@ class TeamsController < ApplicationController
     end
   end
 
+  def show
+    @usr = @admin.users.find(params[:id])
+  end
+
   def edit
-    @team = Team.find(params[:id])
+    @team = @admin.teams.find(params[:id])
+    @team.team_memberships.build if @team.team_memberships.empty?
   end
 
   def update
-    @team = Team.find(params[:id])
+    @team = @admin.teams.find(params[:id])
     if @team.update(team_params)
       redirect_to teams_path, notice: 'Team was successfully updated.'
     else
@@ -32,7 +39,7 @@ class TeamsController < ApplicationController
   end
 
   def destroy
-    @team = Team.find(params[:id])
+    @team = @admin.teams.find(params[:id])
     @team.destroy
     redirect_to teams_path, notice: 'Team was successfully destroyed.'
   end
@@ -40,6 +47,12 @@ class TeamsController < ApplicationController
   private
 
   def team_params
-    params.require(:team).permit(:name, :description, :owner_id)
+    params.require(:team).permit(:name, :description, team_memberships_attributes: [:id, :user_id, :_destroy])
   end
+
+  def set_current_admin
+    @admin = current_admin
+  end
+
+
 end

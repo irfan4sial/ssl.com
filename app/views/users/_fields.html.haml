@@ -1,0 +1,4 @@
+.nested-fields
+  = form.label :team_id, 'Select Team:'
+  = form.collection_select :team_id, @teams, :id, :name, { include_blank: 'No team' }
+  = link_to_remove_association 'Remove', form

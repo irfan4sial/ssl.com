@@ -13,10 +13,11 @@
   .field
     = form.label :description
     = form.text_field :description, required: true
-
+  
   .field
-    = form.label :owner
-    = form.collection_select :owner_id, User.all, :id, :username, prompt: 'Select Owner', required: true
+    = form.fields_for :team_memberships do |role_form|
+      = role_form.label :username, "User"
+      = role_form.collection_select :user_id, User.all, :id, :username, include_blank: true  
 
   .actions
     = form.submit 'Save'

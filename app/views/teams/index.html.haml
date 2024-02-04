@@ -1,19 +1,27 @@
 %h1 Teams List
+  
+= link_to 'New Team', new_team_path
 
-%table
+%table.border.rounded-lg.shadow-md.w-full
   %thead
     %tr
-      %th Name
-      %th Description
-      %th Owner
-      %th Actions
+      %th.px-4.py-2.bg-gray-800.text-white.font-semibold.border.border-gray-600
+        Name
+      %th.px-4.py-2.bg-gray-800.text-white.font-semibold.border.border-gray-600
+        Description
+      %th.px-4.py-2.bg-gray-800.text-white.font-semibold.border.border-gray-600
+        Edit
+      %th.px-4.py-2.bg-gray-800.text-white.font-semibold.border.border-gray-600
+        Delete  
+        
   %tbody
     - @teams.each do |team|
       %tr
-        %td= team.name
-        %td= team.description
-        %td= team.owner.username
-        %td= link_to 'Edit', edit_team_path(team)
-        %td= link_to 'Destroy', team, method: :delete, data: { confirm: 'Are you sure?' }
-  
-= link_to 'New Team', new_team_path
+        %td.px-4.py-2.border.border-gray-600
+          = team.name
+        %td.px-4.py-2.border.border-gray-600
+          = team.description
+        %td.px-4.py-2.border.border-gray-600
+          = link_to 'Edit', edit_team_path(team)
+        %td.px-4.py-2.border.border-gray-600
+          = link_to 'Destroy', team, method: :delete, data: { confirm: 'Are you sure?' }

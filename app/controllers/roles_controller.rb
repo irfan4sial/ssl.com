@@ -1,8 +1,9 @@
 class RolesController < ApplicationController
   before_action :authenticate_admin!
+  before_action :set_current_admin
 
   def index
-    @roles = Role.all
+    @roles = @admin.roles.all
   end
 
   def new
@@ -10,7 +11,7 @@ class RolesController < ApplicationController
   end
 
   def create
-    @role = Role.new(role_params)
+    @role = @admin.roles.new(role_params)
     if @role.save
       redirect_to roles_path, notice: 'Role was successfully created.'
     else
@@ -19,11 +20,11 @@ class RolesController < ApplicationController
   end
 
   def edit
-    @role = Role.find(params[:id])
+    @role = @admin.roles.find(params[:id])
   end
 
   def update
-    @role = Role.find(params[:id])
+    @role = @admin.roles.find(params[:id])
     if @role.update(role_params)
       redirect_to roles_path, notice: 'Role was successfully updated.'
     else
@@ -32,7 +33,7 @@ class RolesController < ApplicationController
   end
 
   def destroy
-    @role = Role.find(params[:id])
+    @role = @admin.roles.find(params[:id])
     @role.destroy
     redirect_to roles_path, notice: 'Role was successfully destroyed.'
   end
@@ -42,4 +43,9 @@ class RolesController < ApplicationController
   def role_params
     params.require(:role).permit(:name, :description)
   end
+
+  def set_current_admin
+    @admin = current_admin
+  end
+
 end
