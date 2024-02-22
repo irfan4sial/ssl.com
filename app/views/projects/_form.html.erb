@@ -1,0 +1,28 @@
+<h1>Field Form</h1>
+<%= form_with(model: @project, html: { novalidate: true }, data: { controller: 'form', target: "form.form", action: 'submit->form#formSubmit' }) do |f| %>
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name, required: true %>
+  </div>
+  <div>
+    <%= f.fields_for :tasks do |task_form| %>
+      <%= render "task_fields", f: task_form %>
+    <% end %>
+    <%= link_to_add_fields "Add Task", f, :tasks %>
+  </div>
+
+  <div class="clipboard-button">
+    <p>Not Good</p>
+  </div>
+<!--  <div>-->
+    <%#= button_tag "Greet", data: {} %>
+<!--  </div>-->
+<!--  <input data-projects-target="email" type="email">-->
+<!--  <button data-action="projects#greet">Greet</button>-->
+
+
+  <div>
+    <%= f.submit %>
+  </div>
+<% end %>
+

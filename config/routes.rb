@@ -4,8 +4,9 @@ Rails.application.routes.draw do
   resources :users
   resources :teams
   resources :roles
+  resources :projects
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  root "users#index"
+  root "projects#index"
 end

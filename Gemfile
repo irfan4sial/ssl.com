@@ -45,7 +45,6 @@ gem "bootsnap", require: false
 gem 'devise'
 gem 'tailwindcss-rails'
 gem 'haml-rails'
-gem 'stimulus-rails'
 gem 'rspec-rails'
 gem 'standardrb'
 

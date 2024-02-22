@@ -1,0 +1,19 @@
+<fieldset>
+  <%= f.label :name, "Task Name" %>
+  <%= f.text_field :name %>
+  <%= f.hidden_field :_destroy %>
+  <%#= f.label :_destroy, "Remove Task", class: 'remove_fields' %>
+  <%= link_to "Remove Task", "#", class: 'remove_field', data: { action: "form#deleteRow"} %>
+
+  <div data-controller="form" data-form-show-if-value="human">
+    <select data-form-target="input" value="human" data-action="change->form#toggle">
+      <option value=""></option>
+      <option value="human" selected>human</option>
+      <option value="animal">animal</option>
+    </select>
+    <div data-form-target="output" hidden="">
+      an output if human
+    </div>
+  </div>
+
+</fieldset>

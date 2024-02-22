@@ -1,7 +1,18 @@
 %h1 Users List
   
-= link_to 'New User', new_user_path
+= link_to 'New User link 2', new_user_path
 
+%hr
+%div.flex.flex-row
+  %ul.flex.flex-row
+    %li
+      = link_to "Users", users_path
+    %li
+      = link_to "Roles", roles_path
+    %li
+      = link_to "Teams", teams_path     
+
+%hr
 %table.border.rounded-lg.shadow-md.w-full
   %thead
     %tr
